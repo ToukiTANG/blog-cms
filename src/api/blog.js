@@ -29,7 +29,7 @@ export function getCategoryAndTag() {
 
 export function saveBlog(blog) {
 	return axios({
-		url: 'blog',
+		url: 'blog/save',
 		method: 'POST',
 		data: {
 			...blog
