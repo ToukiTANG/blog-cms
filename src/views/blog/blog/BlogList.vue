@@ -5,7 +5,7 @@
 			<el-col :span="8">
 				<el-input placeholder="请输入标题" v-model="queryInfo.title" :clearable="true" @clear="search" @keyup.native.enter="search" size="small" style="min-width: 500px">
 					<el-select v-model="queryInfo.categoryId" slot="prepend" placeholder="请选择分类" :clearable="true" @change="search" style="width: 160px">
-						<el-option :label="item.name" :value="item.id" v-for="item in categoryList" :key="item.id"></el-option>
+						<el-option :label="item.categoryName" :value="item.id" v-for="item in categoryList" :key="item.id"></el-option>
 					</el-select>
 					<el-button slot="append" icon="el-icon-search" @click="search"></el-button>
 				</el-input>
@@ -15,10 +15,10 @@
 		<el-table :data="blogList">
 			<el-table-column label="序号" type="index" width="50"></el-table-column>
 			<el-table-column label="标题" prop="title" show-overflow-tooltip></el-table-column>
-			<el-table-column label="分类" prop="category.name" width="150"></el-table-column>
+			<el-table-column label="分类" prop="category.categoryName" width="150"></el-table-column>
 			<el-table-column label="置顶" width="80">
 				<template v-slot="scope">
-					<el-switch v-model="scope.row.isTop" @change="blogTopChanged(scope.row)"></el-switch>
+					<el-switch v-model="scope.row.top" @change="blogTopChanged(scope.row)"></el-switch>
 				</template>
 			</el-table-column>
 			<el-table-column label="创建时间" width="170">
@@ -42,38 +42,6 @@
 		               :page-sizes="[10, 20, 30, 50]" :page-size="queryInfo.pageSize" :total="total"
 		               layout="total, sizes, prev, pager, next, jumper" background>
 		</el-pagination>
-
-		<!--编辑可见性状态对话框-->
-		<el-dialog title="博客可见性" width="30%" :visible.sync="dialogVisible">
-			<!--内容主体-->
-			<el-form label-width="50px" @submit.native.prevent>
-				<el-form-item>
-					<el-radio-group v-model="radio">
-						<el-radio :label="1">公开</el-radio>
-						<el-radio :label="2">私密</el-radio>
-						<el-radio :label="3">密码保护</el-radio>
-					</el-radio-group>
-				</el-form-item>
-				<el-form-item label="密码" v-if="radio===3">
-					<el-input v-model="visForm.password"></el-input>
-				</el-form-item>
-				<el-form-item v-if="radio!==2">
-					<el-row>
-						<el-col :span="6">
-							<el-switch v-model="visForm.commentEnabled" active-text="评论"></el-switch>
-						</el-col>
-						<el-col :span="6">
-							<el-switch v-model="visForm.top" active-text="置顶"></el-switch>
-						</el-col>
-					</el-row>
-				</el-form-item>
-			</el-form>
-			<!--底部-->
-			<span slot="footer">
-				<el-button @click="dialogVisible=false">取 消</el-button>
-				<el-button type="primary" @click="saveVisibility">保存</el-button>
-			</span>
-		</el-dialog>
 	</div>
 </template>
 
@@ -90,22 +58,11 @@
 					title: '',
 					categoryId: null,
 					pageNum: 1,
-					pageSize: 10
+          pageSize:10,
 				},
 				blogList: [],
 				categoryList: [],
 				total: 0,
-				dialogVisible: false,
-				blogId: 0,
-				radio: 1,
-				visForm: {
-					appreciation: false,
-					recommend: false,
-					commentEnabled: false,
-					top: false,
-					published: false,
-					password: '',
-				}
 			}
 		},
 		created() {
@@ -122,12 +79,11 @@
       //页首搜索功能
 			search() {
 				this.queryInfo.pageNum = 1
-				this.queryInfo.pageSize = 10
 				this.getData()
 			},
 			//切换博客置顶状态
 			blogTopChanged(row) {
-				updateTop(row.id, row.isTop).then(res => {
+				updateTop(row.id, row.top).then(res => {
 					this.msgSuccess(res.msg);
 				})
 			},
@@ -145,7 +101,7 @@
 				this.$router.push(`/blog/edit/${id}`)
 			},
 			deleteBlogById(id) {
-				this.$confirm('此操作将永久删除该博客<strong style="color: red">及其所有评论</strong>，是否删除?<br>建议将博客置为<strong style="color: red">私密</strong>状态！', '提示', {
+				this.$confirm('此操作将永久删除该博客<strong style="color: red">及其所有评论</strong>，是否删除?', '提示', {
 					confirmButtonText: '确定',
 					cancelButtonText: '取消',
 					type: 'warning',
