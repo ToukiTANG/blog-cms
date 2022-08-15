@@ -12,7 +12,7 @@ export function getData(queryInfo) {
 
 export function addTag(form) {
 	return axios({
-		url: 'tag',
+		url: 'tag/save',
 		method: 'POST',
 		data: {
 			...form
@@ -22,8 +22,8 @@ export function addTag(form) {
 
 export function editTag(form) {
 	return axios({
-		url: 'tag',
-		method: 'PUT',
+		url: 'tag/update',
+		method: 'POST',
 		data: {
 			...form
 		}
@@ -32,8 +32,8 @@ export function editTag(form) {
 
 export function deleteTagById(id) {
 	return axios({
-		url: 'tag',
-		method: 'DELETE',
+		url: 'tag/delete',
+		method: 'POST',
 		params: {
 			id
 		}

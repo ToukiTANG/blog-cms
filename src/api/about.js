@@ -9,8 +9,8 @@ export function getAbout() {
 
 export function updateAbout(form) {
 	return axios({
-		url: 'about',
-		method: 'PUT',
+		url: 'about/update',
+		method: 'POST',
 		data: {
 			...form
 		}

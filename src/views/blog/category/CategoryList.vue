@@ -9,7 +9,7 @@
 
 		<el-table :data="categoryList">
 			<el-table-column label="序号" type="index" width="50"></el-table-column>
-			<el-table-column label="名称" prop="name"></el-table-column>
+			<el-table-column label="名称" prop="categoryName"></el-table-column>
 			<el-table-column label="操作">
 				<template v-slot="scope">
 					<el-button type="primary" icon="el-icon-edit" size="mini" @click="showEditDialog(scope.row)">编辑</el-button>
@@ -30,8 +30,8 @@
 		<el-dialog title="添加分类" width="50%" :visible.sync="addDialogVisible" :close-on-click-modal="false" @close="addDialogClosed">
 			<!--内容主体-->
 			<el-form :model="addForm" :rules="formRules" ref="addFormRef" label-width="80px">
-				<el-form-item label="分类名称" prop="name">
-					<el-input v-model="addForm.name"></el-input>
+				<el-form-item label="分类名称" prop="categoryName">
+					<el-input v-model="addForm.categoryName"></el-input>
 				</el-form-item>
 			</el-form>
 			<!--底部-->
@@ -45,8 +45,8 @@
 		<el-dialog title="编辑分类" width="50%" :visible.sync="editDialogVisible" :close-on-click-modal="false" @close="editDialogClosed">
 			<!--内容主体-->
 			<el-form :model="editForm" :rules="formRules" ref="editFormRef" label-width="80px">
-				<el-form-item label="分类名称" prop="name">
-					<el-input v-model="editForm.name"></el-input>
+				<el-form-item label="分类名称" prop="categoryName">
+					<el-input v-model="editForm.categoryName"></el-input>
 				</el-form-item>
 			</el-form>
 			<!--底部-->
@@ -78,11 +78,11 @@
 				addDialogVisible: false,
 				editDialogVisible: false,
 				addForm: {
-					name: ''
+          categoryName: ''
 				},
 				editForm: {},
 				formRules: {
-					name: [{required: true, message: '请输入分类名称', trigger: 'blur'}]
+          categoryName: [{required: true, message: '请输入分类名称', trigger: 'blur'}]
 				}
 			}
 		},

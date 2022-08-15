@@ -10,7 +10,7 @@
 			</el-table-column>
 			<el-table-column label="点赞数" prop="likes" width="80"></el-table-column>
 			<el-table-column label="创建时间" width="170">
-				<template v-slot="scope">{{ scope.row.createTime | dateFormat }}</template>
+				<template v-slot="scope">{{ scope.row.createTime | timeFormat }}</template>
 			</el-table-column>
 			<el-table-column label="操作" width="200">
 				<template v-slot="scope">

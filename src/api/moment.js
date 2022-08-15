@@ -13,7 +13,7 @@ export function getMomentListByQuery(queryInfo) {
 export function updatePublished(id, published) {
 	return axios({
 		url: 'moment/published',
-		method: 'PUT',
+		method: 'POST',
 		params: {
 			id,
 			published
@@ -33,8 +33,8 @@ export function getMomentById(id) {
 
 export function deleteMomentById(id) {
 	return axios({
-		url: 'moment',
-		method: 'DELETE',
+		url: 'moment/delete',
+		method: 'POST',
 		params: {
 			id
 		}
@@ -43,7 +43,7 @@ export function deleteMomentById(id) {
 
 export function saveMoment(moment) {
 	return axios({
-		url: 'moment',
+		url: 'moment/save',
 		method: 'POST',
 		data: {
 			...moment
@@ -53,8 +53,8 @@ export function saveMoment(moment) {
 
 export function updateMoment(moment) {
 	return axios({
-		url: 'moment',
-		method: 'PUT',
+		url: 'moment/update',
+		method: 'POST',
 		data: {
 			...moment
 		}

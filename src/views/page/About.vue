@@ -7,11 +7,6 @@
 
 			<el-row :gutter="20" style="width: 50%">
 				<el-col :span="12">
-					<el-form-item label="网易云歌曲ID" prop="musicId">
-						<el-input v-model="form.musicId" type="number" placeholder="请输入网易云歌曲ID（可选）"></el-input>
-					</el-form-item>
-				</el-col>
-				<el-col :span="12">
 					<el-form-item label="评论开关">
 						<el-switch v-model="form.commentEnabled" active-text="评论"></el-switch>
 					</el-form-item>
@@ -40,7 +35,6 @@
 			return {
 				form: {
 					title: '',
-					musicId: null,
 					content: '',
 					commentEnabled: true
 				},
@@ -56,7 +50,6 @@
 			getData() {
 				getAbout().then(res => {
 					this.form.title = res.data.title
-					this.form.musicId = res.data.musicId
 					this.form.content = res.data.content
 					this.form.commentEnabled = res.data.commentEnabled === 'true' ? true : false
 				})
@@ -64,11 +57,6 @@
 			submit() {
 				this.$refs.formRef.validate(valid => {
 					if (valid) {
-						//纯数字
-						const reg = /^\d{1,}$/
-						if (!reg.test(this.form.musicId)) {
-							return this.msgError("歌曲ID有误")
-						}
 						updateAbout(this.form).then(res => {
 							this.msgSuccess(res.msg)
 						})
