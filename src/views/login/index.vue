@@ -85,6 +85,7 @@ export default {
           login(this.loginForm).then(res => {
           	this.msgSuccess(res.msg);
           	window.localStorage.setItem('token', res.data.token)
+            window.localStorage.setItem('user',JSON.stringify(res.data.user))
           	this.$router.push('/')
           })
           this.loading = false

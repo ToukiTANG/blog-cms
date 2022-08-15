@@ -10,7 +10,7 @@
 					<img :src="user.avatar" class="user-avatar">
 				</div>
 				<el-dropdown-menu slot="dropdown" class="user-dropdown">
-					<a target="_blank" href="https://github.com/Naccl/NBlog">
+					<a target="_blank" href="https://github.com/ToukiTANG/blog-app">
 						<el-dropdown-item>
 							<SvgIcon icon-class="github" class-name="svg"/>
 							<span>GitHub</span>
@@ -40,9 +40,7 @@
 		},
 		data() {
 			return {
-				user: {
-          avatar:"http://rfjxf8517.hn-bkt.clouddn.com/touki.jpg"
-        },
+				user: {},
 			}
 		},
 		computed: {
@@ -58,10 +56,10 @@
 				this.$store.dispatch('app/toggleSideBar')
 			},
 			getUserInfo() {
-				// this.user = JSON.parse(window.localStorage.getItem('user') || null)
-				// if (!this.user) {
-				// 	this.$router.push('/login')
-				// }
+				this.user = JSON.parse(window.localStorage.getItem('user') || null)
+				if (!this.user) {
+					this.$router.push('/login')
+				}
 			},
 			logout() {
 				window.localStorage.removeItem('token')
