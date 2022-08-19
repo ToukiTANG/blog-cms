@@ -13,7 +13,7 @@ export function getJobList(queryInfo) {
 export function updateJobStatus(jobId, status) {
 	return axios({
 		url: 'job/status',
-		method: 'PUT',
+		method: 'POST',
 		params: {
 			jobId,
 			status
@@ -33,8 +33,8 @@ export function runJobOnce(jobId) {
 
 export function deleteJobById(jobId) {
 	return axios({
-		url: 'job',
-		method: 'DELETE',
+		url: 'job/delete',
+		method: 'POST',
 		params: {
 			jobId
 		}
@@ -43,7 +43,7 @@ export function deleteJobById(jobId) {
 
 export function addJob(job) {
 	return axios({
-		url: 'job',
+		url: 'job/add',
 		method: 'POST',
 		data: {
 			...job
@@ -53,8 +53,8 @@ export function addJob(job) {
 
 export function editJob(job) {
 	return axios({
-		url: 'job',
-		method: 'PUT',
+		url: 'job/update',
+		method: 'POST',
 		data: {
 			...job
 		}
@@ -73,8 +73,8 @@ export function getJobLogList(queryInfo) {
 
 export function deleteJobLogByLogId(logId) {
 	return axios({
-		url: 'job/log',
-		method: 'DELETE',
+		url: 'job/deleteLog',
+		method: 'POST',
 		params: {
 			logId
 		}

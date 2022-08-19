@@ -28,7 +28,7 @@
 				</template>
 			</el-table-column>
 			<el-table-column label="执行时间" width="170">
-				<template v-slot="scope">{{ scope.row.createTime | dateFormat }}</template>
+				<template v-slot="scope">{{ scope.row.createTime | timeFormat }}</template>
 			</el-table-column>
 			<el-table-column label="操作" width="200">
 				<template v-slot="scope">
@@ -54,7 +54,7 @@
 						<el-form-item label="日志ID：">{{ detail.logId }}</el-form-item>
 						<el-form-item label="任务ID：">{{ detail.jobId }}</el-form-item>
 						<el-form-item label="执行耗时：">{{ detail.times }} 毫秒</el-form-item>
-						<el-form-item label="执行时间：">{{ detail.createTime | dateFormat }}</el-form-item>
+						<el-form-item label="执行时间：">{{ detail.createTime | timeFormat }}</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="Bean：">{{ detail.beanName }}</el-form-item>

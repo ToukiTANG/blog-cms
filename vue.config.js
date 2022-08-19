@@ -37,7 +37,7 @@ module.exports = {
 			errors: true
 		},
 		proxy: {
-			"/admin": {
+			"/": {
 				target: 'http://localhost:8888',
 				changeOrigin: true,
 			}
