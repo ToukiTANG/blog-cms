@@ -9,7 +9,7 @@ module.exports = {
 	 * @type {string}
 	 * @description logo URL
 	 */
-	logo: 'http://rfjxf8517.hn-bkt.clouddn.com/touki.jpg',
+	logo: 'https://cdn.touki.top/blog/touki.jpg',
 
 	/**
 	 * @type {boolean} true | false

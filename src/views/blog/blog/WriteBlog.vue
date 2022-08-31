@@ -11,6 +11,7 @@
           <el-form-item label="文章首图URL" prop="firstPicture">
             <el-input v-model="form.firstPicture" placeholder="文章首图，用于随机文章展示"></el-input>
           </el-form-item>
+          <el-upload action="''" :multiple="false" :file-list="[]" :http-request="uploadFirstPicture"><el-button>上传</el-button></el-upload>
         </el-col>
       </el-row>
 
@@ -19,7 +20,7 @@
       </el-form-item>
 
       <el-form-item label="文章正文" prop="content">
-        <mavon-editor v-model="form.content"/>
+        <mavon-editor v-model="form.content" @imgAdd="uploadImg" ref="md"/>
       </el-form-item>
 
       <el-row :gutter="20">
@@ -79,6 +80,7 @@
 <script>
 import Breadcrumb from "@/components/Breadcrumb";
 import {getCategoryAndTag, saveBlog, getBlogById, updateBlog} from '@/api/blog'
+import {uploadImg} from "@/api/upload";
 
 export default {
   name: "WriteBlog",
@@ -126,6 +128,20 @@ export default {
       getBlogById(id).then(res => {
         this.computeCategoryAndTag(res.data)
         this.form = res.data
+      })
+    },
+    uploadFirstPicture(updata){
+      let formdata = new FormData();
+      formdata.append('image', updata.file)
+      uploadImg(formdata).then((res) => {
+        this.form.firstPicture=res.data
+      })
+    },
+    uploadImg(pos, file) {
+      let formdata = new FormData();
+      formdata.append('image', file)
+      uploadImg(formdata).then((res) => {
+        this.$refs.md.$img2Url(pos, res.data)
       })
     },
     computeCategoryAndTag(blog) {

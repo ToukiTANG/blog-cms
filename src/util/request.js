@@ -6,7 +6,7 @@ import router from "@/router";
 
 const request = axios.create({
     baseURL: '/admin',
-    timeout: 5000
+    timeout: 30000
 })
 
 let CancelToken = axios.CancelToken
