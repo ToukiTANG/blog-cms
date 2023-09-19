@@ -16,7 +16,7 @@ request.interceptors.request.use(config => {
         //对于访客模式，除GET请求外，都拦截并提示
         const userJson = window.localStorage.getItem('user') || '{}'
         const user = JSON.parse(userJson)
-        if (userJson !== '{}' && user.roles[0].name !== 'ROLE_admin' && config.method !== 'get') {
+        if (userJson !== '{}' && user.roles[0].roleName !== 'ROLE_admin' && config.method !== 'get') {
             config.cancelToken = new CancelToken(function executor(cancel) {
                 cancel('访客模式，不允许操作')
             })
@@ -24,9 +24,9 @@ request.interceptors.request.use(config => {
         }
 
         NProgress.start()
-        const token = window.localStorage.getItem('token')
-        if (token) {
-            config.headers.Authorization = token
+        const ac_token = window.localStorage.getItem('access_token')
+        if (ac_token) {
+            config.headers.Authorization = 'Bearer ' + ac_token
         }
         return config
     },
@@ -41,12 +41,11 @@ request.interceptors.request.use(config => {
 request.interceptors.response.use(response => {
         NProgress.done()
         const res = response.data
-        if (res.code !== 200) {
+        if (res.code !== 2000) {
             if (res.code === 40003) {
                 let msg = res.msg || 'Error'
                 Message.error(msg)
-                window.localStorage.removeItem("token")
-                window.localStorage.removeItem("user")
+                window.localStorage.clear()
                 router.push('/login')
                 return Promise.reject(new Error(msg))
             }

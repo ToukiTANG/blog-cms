@@ -234,7 +234,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
     if (to.path !== '/login') {
         // 获取token
-        const tokenStr = window.localStorage.getItem('token')
+        const tokenStr = window.localStorage.getItem('access_token')
         if (!tokenStr) return next("/login")
     }
     document.title = getPageTitle(to.meta.title)

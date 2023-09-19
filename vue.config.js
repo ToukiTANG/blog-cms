@@ -38,7 +38,7 @@ module.exports = {
 		},
 		proxy: {
 			"/": {
-				target: 'http://localhost:8888',
+				target: 'http://localhost:8848',
 				changeOrigin: true,
 			}
 		},
