@@ -5,7 +5,7 @@
 			<el-col :span="8">
 				<el-input placeholder="请输入标题" v-model="queryInfo.title" :clearable="true" @clear="search" @keyup.native.enter="search" size="small" style="min-width: 500px">
 					<el-select v-model="queryInfo.categoryId" slot="prepend" placeholder="请选择分类" :clearable="true" @change="search" style="width: 160px">
-						<el-option :label="item.categoryName" :value="item.id" v-for="item in categoryList" :key="item.id"></el-option>
+						<el-option :label="item.categoryName" :value="item.categoryId" v-for="item in categoryList" :key="item.categoryId"></el-option>
 					</el-select>
 					<el-button slot="append" icon="el-icon-search" @click="search"></el-button>
 				</el-input>
@@ -29,8 +29,8 @@
 			</el-table-column>
 			<el-table-column label="操作" width="200">
 				<template v-slot="scope">
-					<el-button type="primary" icon="el-icon-edit" size="mini" @click="goBlogEditPage(scope.row.id)">编辑</el-button>
-					<el-popconfirm title="确定删除吗？" icon="el-icon-delete" iconColor="red" @onConfirm="deleteBlogById(scope.row.id)">
+					<el-button type="primary" icon="el-icon-edit" size="mini" @click="goBlogEditPage(scope.row.blogId)">编辑</el-button>
+					<el-popconfirm title="确定删除吗？" icon="el-icon-delete" iconColor="red" @onConfirm="deleteBlogById(scope.row.blogId)">
 						<el-button size="mini" type="danger" icon="el-icon-delete" slot="reference">删除</el-button>
 					</el-popconfirm>
 				</template>
@@ -71,7 +71,7 @@
 		methods: {
 			getData() {
 				getDataByQuery(this.queryInfo).then(res => {
-					this.blogList = res.data.blogs.list
+					this.blogList = res.data.blogs.dataList
 					this.categoryList = res.data.categories
 					this.total = res.data.blogs.total
 				})

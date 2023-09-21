@@ -10,7 +10,7 @@
 		</el-form>
 
 		<el-table :data="jobList">
-			<el-table-column label="任务ID" prop="jobId" width="80"></el-table-column>
+			<el-table-column label="任务ID" prop="jobId" width="280"></el-table-column>
 			<el-table-column label="Bean" prop="beanName"></el-table-column>
 			<el-table-column label="方法名" prop="methodName"></el-table-column>
 			<el-table-column label="参数" prop="params"></el-table-column>
@@ -135,7 +135,7 @@
 		methods: {
 			getData() {
 				getJobList(this.queryInfo).then(res => {
-					this.jobList = res.data.list
+					this.jobList = res.data.dataList
 					this.total = res.data.total
 				})
 			},

@@ -42,7 +42,7 @@ request.interceptors.response.use(response => {
         NProgress.done()
         const res = response.data
         if (res.code !== 2000) {
-            if (res.code === 40003) {
+            if (res.code === 4002 || res.code === 4003) {
                 let msg = res.msg || 'Error'
                 Message.error(msg)
                 window.localStorage.clear()
