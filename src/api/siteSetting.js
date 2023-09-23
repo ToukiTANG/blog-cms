@@ -9,7 +9,7 @@ export function getSiteSettingData() {
 
 export function update(settings, deleteIds) {
 	return axios({
-		url: 'siteSetting/update',
+		url: 'siteSettings/update',
 		method: 'POST',
 		data: {
 			settings,
