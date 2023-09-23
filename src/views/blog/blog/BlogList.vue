@@ -47,7 +47,7 @@
 
 <script>
 	import Breadcrumb from "@/components/Breadcrumb";
-	import {getDataByQuery, deleteBlogById, updateTop, updateRecommend, updateVisibility} from '@/api/blog'
+	import {getDataByQuery, deleteBlogById, updateTop} from '@/api/blog'
 
 	export default {
 		name: "BlogList",
@@ -83,7 +83,7 @@
 			},
 			//切换博客置顶状态
 			blogTopChanged(row) {
-				updateTop(row.id, row.top).then(res => {
+				updateTop(row.blogId, row.top).then(res => {
 					this.msgSuccess(res.msg);
 				})
 			},

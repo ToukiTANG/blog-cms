@@ -19,21 +19,21 @@
       </el-form-item>
 
       <el-form-item label="文章正文" prop="content">
-        <mavon-editor v-model="form.content"/>
+        <mavon-editor v-model="form.content.text"/>
       </el-form-item>
 
       <el-row :gutter="20">
         <el-col :span="12">
           <el-form-item label="分类" prop="cate">
             <el-select v-model="form.cate" placeholder="请选择分类（输入可添加新分类）" :allow-create="true" :filterable="true" style="width: 100%;">
-              <el-option :label="item.categoryName" :value="item.id" v-for="item in categoryList" :key="item.id"></el-option>
+              <el-option :label="item.categoryName" :value="item.categoryId" v-for="item in categoryList" :key="item.categoryId"></el-option>
             </el-select>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="标签" prop="tagList">
             <el-select v-model="form.tagList" placeholder="请选择标签（输入可添加新标签）" :allow-create="true" :filterable="true" :multiple="true" style="width: 100%;">
-              <el-option :label="item.tagName" :value="item.id" v-for="item in tagList" :key="item.id"></el-option>
+              <el-option :label="item.tagName" :value="item.tagId" v-for="item in tagList" :key="item.tagId"></el-option>
             </el-select>
           </el-form-item>
         </el-col>
@@ -129,10 +129,10 @@ export default {
       })
     },
     computeCategoryAndTag(blog) {
-      blog.cate = blog.category.id
+      blog.cate = blog.category.categoryId
       blog.tagList = []
       blog.tags.forEach(item => {
-        blog.tagList.push(item.id)
+        blog.tagList.push(item.tagId)
       })
     },
     submit() {
