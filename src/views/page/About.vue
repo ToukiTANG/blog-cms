@@ -14,7 +14,7 @@
 			</el-row>
 
 			<el-form-item label="正文" prop="content">
-				<mavon-editor v-model="form.content"/>
+				<mavon-editor ref="md" v-model="form.content" @imgAdd="$imgAdd"/>
 			</el-form-item>
 
 			<el-form-item style="text-align: right;">
@@ -27,6 +27,7 @@
 <script>
 	import Breadcrumb from "@/components/Breadcrumb";
 	import {getAbout, updateAbout} from "@/api/about";
+  import {uploadFile} from "@/api/file";
 
 	export default {
 		name: "About",
@@ -47,11 +48,19 @@
 			this.getData()
 		},
 		methods: {
+      $imgAdd(pos, $file) {
+        const formData = new FormData();
+        formData.append('image', $file);
+        uploadFile(formData).then((url) => {
+          console.log(url)
+          this.$refs.md.$img2Url(pos, url.data);
+        })
+      },
 			getData() {
 				getAbout().then(res => {
 					this.form.title = res.data.title
 					this.form.content = res.data.content
-					this.form.commentEnabled = res.data.commentEnabled === 'true' ? true : false
+					this.form.commentEnabled = res.data.commentEnabled === 'true'
 				})
 			},
 			submit() {

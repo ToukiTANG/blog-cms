@@ -10,16 +10,26 @@
         <el-col :span="12">
           <el-form-item label="文章首图URL" prop="firstPicture">
             <el-input v-model="form.firstPicture" placeholder="文章首图，用于随机文章展示"></el-input>
+            <el-upload class="upload"
+                       ref="upload"
+                       action="string"
+                       :auto-upload="true"
+                       :http-request="uploadFile"
+            >
+              <el-button size="small"
+                         type="primary">选取文件
+              </el-button>
+            </el-upload>
           </el-form-item>
         </el-col>
       </el-row>
 
       <el-form-item label="文章描述" prop="description">
-        <mavon-editor v-model="form.description"/>
+        <mavon-editor ref="md" v-model="form.description" @imgAdd="$imgAdd"/>
       </el-form-item>
 
       <el-form-item label="文章正文" prop="content">
-        <mavon-editor v-model="form.content.text"/>
+        <mavon-editor ref="md" v-model="form.content.text" @imgAdd="$imgAdd"/>
       </el-form-item>
 
       <el-row :gutter="20">
@@ -32,7 +42,8 @@
         </el-col>
         <el-col :span="12">
           <el-form-item label="标签" prop="tagList">
-            <el-select v-model="form.tagList" placeholder="请选择标签（输入可添加新标签）" :allow-create="true" :filterable="true" :multiple="true" style="width: 100%;">
+            <el-select v-model="form.tagList" placeholder="请选择标签（输入可添加新标签）" :allow-create="true" :filterable="true" :multiple="true"
+                       style="width: 100%;">
               <el-option :label="item.tagName" :value="item.tagId" v-for="item in tagList" :key="item.tagId"></el-option>
             </el-select>
           </el-form-item>
@@ -79,6 +90,8 @@
 <script>
 import Breadcrumb from "@/components/Breadcrumb";
 import {getCategoryAndTag, saveBlog, getBlogById, updateBlog} from '@/api/blog'
+import {uploadFile} from "@/api/file";
+import {Message} from "element-ui";
 
 export default {
   name: "WriteBlog",
@@ -93,11 +106,11 @@ export default {
         title: '',
         firstPicture: '',
         description: '',
-        content: '',
+        content: {},
         cate: null,
         tagList: [],
         views: 0,
-        commentEnabled: false,
+        commentEnable: false,
         top: false,
       },
       formRules: {
@@ -116,6 +129,20 @@ export default {
     }
   },
   methods: {
+    uploadFile(file) {
+      const formData = new FormData();
+      formData.append("image", file.file);
+      uploadFile(formData).then((res) => {
+        this.form.firstPicture = res.data
+      })
+    },
+    $imgAdd(pos, $file) {
+      const formData = new FormData();
+      formData.append('image', $file);
+      uploadFile(formData).then((url) => {
+        this.$refs.md.$img2Url(pos, url.data);
+      })
+    },
     getData() {
       getCategoryAndTag().then(res => {
         this.categoryList = res.data.categories
@@ -149,7 +176,7 @@ export default {
             saveBlog(this.form).then(res => {
               this.msgSuccess(res.msg)
               this.$router.push('/blog/list')
-            })
+            }).catch(ex=>{})
           }
         } else {
           this.dialogVisible = false
