@@ -9,9 +9,6 @@
         <el-input v-model="form.likes" type="number" placeholder="可选，默认为 0"></el-input>
       </el-form-item>
 
-      <el-form-item label="创建时间" prop="createTime">
-        <el-date-picker v-model="form.createTime" type="datetime" placeholder="可选，默认此刻" :editable="false"></el-date-picker>
-      </el-form-item>
 
       <el-form-item style="text-align: right;">
         <el-button type="info" @click="submit(false)">仅自己可见</el-button>
@@ -33,7 +30,6 @@ export default {
     return {
       form: {
         content: '',
-        createTime: null,
         likes: 0,
         published: false
       },
@@ -49,7 +45,6 @@ export default {
       const formData = new FormData();
       formData.append('image', $file);
       uploadFile(formData).then((url) => {
-        console.log(url)
         this.$refs.md.$img2Url(pos, url.data);
       })
     },

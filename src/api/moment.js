@@ -2,7 +2,7 @@ import axios from '@/util/request'
 
 export function getMomentListByQuery(queryInfo) {
 	return axios({
-		url: 'moments',
+		url: 'moment/list',
 		method: 'GET',
 		params: {
 			...queryInfo

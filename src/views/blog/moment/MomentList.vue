@@ -14,8 +14,8 @@
 			</el-table-column>
 			<el-table-column label="操作" width="200">
 				<template v-slot="scope">
-					<el-button type="primary" icon="el-icon-edit" size="mini" @click="goEditMomentPage(scope.row.id)">编辑</el-button>
-					<el-popconfirm title="确定删除吗？" icon="el-icon-delete" iconColor="red" @onConfirm="deleteMomentById(scope.row.id)">
+					<el-button type="primary" icon="el-icon-edit" size="mini" @click="goEditMomentPage(scope.row.momentId)">编辑</el-button>
+					<el-popconfirm title="确定删除吗？" icon="el-icon-delete" iconColor="red" @onConfirm="deleteMomentById(scope.row.momentId)">
 						<el-button size="mini" type="danger" icon="el-icon-delete" slot="reference">删除</el-button>
 					</el-popconfirm>
 				</template>
@@ -55,7 +55,7 @@
 		methods: {
 			getMomentList() {
 				getMomentListByQuery(this.queryInfo).then(res => {
-					this.momentList = res.data.list
+					this.momentList = res.data.dataList
 					this.total = res.data.total
 				})
 			},
