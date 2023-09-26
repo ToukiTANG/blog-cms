@@ -8,7 +8,7 @@
 			<el-row :gutter="20" style="width: 50%">
 				<el-col :span="12">
 					<el-form-item label="评论开关">
-						<el-switch v-model="form.commentEnabled" active-text="评论"></el-switch>
+						<el-switch v-model="form.commentEnable" active-text="评论"></el-switch>
 					</el-form-item>
 				</el-col>
 			</el-row>
@@ -37,7 +37,7 @@
 				form: {
 					title: '',
 					content: '',
-					commentEnabled: true
+					commentEnable: true
 				},
 				formRules: {
 					title: [{required: true, message: '请输入标题', trigger: 'change'}],
@@ -60,7 +60,7 @@
 				getAbout().then(res => {
 					this.form.title = res.data.title
 					this.form.content = res.data.content
-					this.form.commentEnabled = res.data.commentEnabled === 'true'
+					this.form.commentEnable = res.data.commentEnable === '1'
 				})
 			},
 			submit() {
