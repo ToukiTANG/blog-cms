@@ -2,7 +2,7 @@ import axios from '@/util/request'
 
 export function getData(queryInfo) {
 	return axios({
-		url: 'tags',
+		url: 'tag/list',
 		method: 'GET',
 		params: {
 			...queryInfo
