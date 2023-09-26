@@ -13,7 +13,7 @@
 			<el-table-column label="操作">
 				<template v-slot="scope">
 					<el-button type="primary" icon="el-icon-edit" size="mini" @click="showEditDialog(scope.row)">编辑</el-button>
-					<el-popconfirm title="确定删除吗？" icon="el-icon-delete" iconColor="red" @onConfirm="deleteCategoryById(scope.row.id)">
+					<el-popconfirm title="确定删除吗？" icon="el-icon-delete" iconColor="red" @onConfirm="deleteCategoryById(scope.row.categoryId)">
 						<el-button size="mini" type="danger" icon="el-icon-delete" slot="reference">删除</el-button>
 					</el-popconfirm>
 				</template>
@@ -92,7 +92,7 @@
 		methods: {
 			getData() {
 				getData(this.queryInfo).then(res => {
-					this.categoryList = res.data.list
+					this.categoryList = res.data.dataList
 					this.total = res.data.total
 				})
 			},
