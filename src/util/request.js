@@ -6,7 +6,7 @@ import router from "@/router";
 
 const request = axios.create({
     baseURL: '/admin',
-    timeout: 10000
+    timeout: 30000
 })
 
 let CancelToken = axios.CancelToken
@@ -42,7 +42,7 @@ request.interceptors.response.use(response => {
         NProgress.done()
         const res = response.data
         if (res.code !== 2000) {
-            if (res.code === 4002 || res.code === 4003) {
+            if (res.code === 4002) {
                 let msg = res.msg || 'Error'
                 Message.error(msg)
                 window.localStorage.clear()
