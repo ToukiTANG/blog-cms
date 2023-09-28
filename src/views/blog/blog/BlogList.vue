@@ -55,7 +55,7 @@
 		data() {
 			return {
 				queryInfo: {
-					title: '',
+					title: null,
 					categoryId: null,
 					pageNum: 1,
           pageSize:10,

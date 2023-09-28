@@ -70,7 +70,7 @@
 				this.getMomentList()
 			},
 			momentPublishedChanged(row) {
-				updatePublished(row.id, row.published).then(res => {
+				updatePublished(row.momentId, row.published).then(res => {
 					this.msgSuccess(res.msg)
 				})
 			},

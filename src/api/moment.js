@@ -10,12 +10,12 @@ export function getMomentListByQuery(queryInfo) {
 	})
 }
 
-export function updatePublished(id, published) {
+export function updatePublished(momentId, published) {
 	return axios({
 		url: 'moment/published',
 		method: 'POST',
 		params: {
-			id,
+			momentId,
 			published
 		}
 	})

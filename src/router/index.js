@@ -109,12 +109,12 @@ const routes = [
                 component: () => import('@/views/page/SiteSetting'),
                 meta: {title: '站点设置', icon: 'bianjizhandian'}
             },
-            {
-                path: 'friend',
-                name: 'FriendList',
-                component: () => import('@/views/page/FriendList'),
-                meta: {title: '友链管理', icon: 'friend'}
-            },
+            // {
+            //     path: 'friend',
+            //     name: 'FriendList',
+            //     component: () => import('@/views/page/FriendList'),
+            //     meta: {title: '友链管理', icon: 'friend'}
+            // },
             {
                 path: 'about',
                 name: 'About',
@@ -130,18 +130,18 @@ const routes = [
         component: Layout,
         meta: {title: '图床管理', icon: 'el-icon-picture'},
         children: [
-            {
-                path: 'setting',
-                name: 'Setting',
-                component: () => import('@/views/pictureHosting/Setting'),
-                meta: {title: '配置', icon: 'el-icon-setting'}
-            },
-            {
-                path: 'github',
-                name: 'GithubManage',
-                component: () => import('@/views/pictureHosting/GithubManage'),
-                meta: {title: 'GitHub', icon: 'el-icon-folder-opened'}
-            },
+            // {
+            //     path: 'setting',
+            //     name: 'Setting',
+            //     component: () => import('@/views/pictureHosting/Setting'),
+            //     meta: {title: '配置', icon: 'el-icon-setting'}
+            // },
+            // {
+            //     path: 'github',
+            //     name: 'GithubManage',
+            //     component: () => import('@/views/pictureHosting/GithubManage'),
+            //     meta: {title: 'GitHub', icon: 'el-icon-folder-opened'}
+            // },
             {
                 path: 'upyun',
                 name: 'UpyunManage',
