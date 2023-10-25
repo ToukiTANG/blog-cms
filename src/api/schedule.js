@@ -23,7 +23,7 @@ export function updateJobStatus(jobId, status) {
 
 export function runJobOnce(jobId) {
 	return axios({
-		url: 'job/run',
+		url: 'job/execute',
 		method: 'POST',
 		params: {
 			jobId

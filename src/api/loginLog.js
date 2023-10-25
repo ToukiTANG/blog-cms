@@ -2,7 +2,7 @@ import axios from '@/util/request'
 
 export function getLoginLogList(queryInfo) {
 	return axios({
-		url: 'loginLogs',
+		url: 'logInLog/list',
 		method: 'GET',
 		params: {
 			...queryInfo
@@ -10,12 +10,12 @@ export function getLoginLogList(queryInfo) {
 	})
 }
 
-export function deleteLoginLogById(id) {
+export function deleteLoginLogById(logId) {
 	return axios({
-		url: 'loginLog',
-		method: 'DELETE',
+		url: 'logInLog/delete',
+		method: 'POST',
 		params: {
-			id
+			logId
 		}
 	})
 }
