@@ -33,7 +33,7 @@
 			<el-table-column label="浏览器" prop="browser" show-overflow-tooltip></el-table-column>
 			<el-table-column label="操作耗时" width="110">
 				<template v-slot="scope">
-					<el-tag size="small">{{ scope.row.times }}ms</el-tag>
+					<el-tag size="small">{{ scope.row.timeConsumed }}ms</el-tag>
 				</template>
 			</el-table-column>
 			<el-table-column label="操作时间" width="170">
@@ -41,7 +41,7 @@
 			</el-table-column>
 			<el-table-column label="操作" width="120">
 				<template v-slot="scope">
-					<el-popconfirm title="确定删除吗？" icon="el-icon-delete" iconColor="red" @onConfirm="deleteLogById(scope.row.id)">
+					<el-popconfirm title="确定删除吗？" icon="el-icon-delete" iconColor="red" @onConfirm="deleteLogById(scope.row.logId)">
 						<el-button size="mini" type="danger" icon="el-icon-delete" slot="reference">删除</el-button>
 					</el-popconfirm>
 				</template>
@@ -85,7 +85,7 @@
 					query.date = query.date[0] + ',' + query.date[1]
 				}
 				getOperationLogList(query).then(res => {
-					this.logList = res.data.list
+					this.logList = res.data.dataList
 					this.total = res.data.total
 				})
 			},
