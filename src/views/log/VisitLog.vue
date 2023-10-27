@@ -54,7 +54,7 @@
 			</el-table-column>
 			<el-table-column label="操作" width="120">
 				<template v-slot="scope">
-					<el-popconfirm title="确定删除吗？" icon="el-icon-delete" iconColor="red" @onConfirm="deleteLogById(scope.row.id)">
+					<el-popconfirm title="确定删除吗？" icon="el-icon-delete" iconColor="red" @onConfirm="deleteLogById(scope.row.logId)">
 						<el-button size="mini" type="danger" icon="el-icon-delete" slot="reference">删除</el-button>
 					</el-popconfirm>
 				</template>
@@ -102,7 +102,7 @@
 					query.date = query.date[0] + ',' + query.date[1]
 				}
 				getVisitLogList(query).then(res => {
-					this.logList = res.data.list
+					this.logList = res.data.dataList
 					this.total = res.data.total
 				})
 			},
