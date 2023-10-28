@@ -80,7 +80,7 @@
 					query.date = query.date[0] + ',' + query.date[1]
 				}
 				getVisitorList(query).then(res => {
-					this.visitorList = res.data.list
+					this.visitorList = res.data.dataList
 					this.total = res.data.total
 				})
 			},
@@ -93,7 +93,7 @@
 				this.getData()
 			},
 			deleteVisitorById(visitor) {
-				deleteVisitor(visitor.id, visitor.uuid).then(res => {
+				deleteVisitor(visitor.visitorId, visitor.uuid).then(res => {
 					this.msgSuccess(res.msg)
 					this.getData()
 				})
